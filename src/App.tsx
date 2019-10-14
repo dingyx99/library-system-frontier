@@ -11,7 +11,7 @@ export const App: React.FunctionComponent = () => {
   return (
     <Stack
       horizontalAlign="center"
-      verticalAlign="center"
+      verticalAlign="start"
       verticalFill
       styles={{
         root: {
@@ -23,9 +23,17 @@ export const App: React.FunctionComponent = () => {
       }}
       gap={15}
     >
+
+      <Stack horizontal gap={15}
+      >
+        <Link href="/login" styles={boldStyle}>Login</Link>
+        <Link href="/register" styles={boldStyle}>Register as a new member</Link>
+        
+      </Stack>
+
       <img src={logo} alt="logo" />
       <Text variant="xxLarge" styles={boldStyle}>
-        Welcome to Your UI Fabric App
+        Welcome to Contoso Library
       </Text>
       <Text variant="large">For a guide on how to customize this project, check out the UI Fabric documentation.</Text>
       <Text variant="large" styles={boldStyle}>
