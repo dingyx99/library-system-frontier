@@ -1,0 +1,36 @@
+/*
+  Your use of the content in the files referenced here is subject to the terms of the license at https://aka.ms/fabric-assets-license
+*/
+@font-face {
+  font-family: 'FabricMDL2Icons';
+  src: url('../fonts/fabric-icons-935ebe02.woff') format('woff');
+}
+
+.ms-Icon {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-family: 'FabricMDL2Icons';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+}
+
+.ms-Icon--Mail:before { content: "\E715"; }
+.ms-Icon--Filter:before { content: "\E71C"; }
+.ms-Icon--Search:before { content: "\E721"; }
+.ms-Icon--FavoriteList:before { content: "\E728"; }
+.ms-Icon--FavoriteStar:before { content: "\E734"; }
+.ms-Icon--FavoriteStarFill:before { content: "\E735"; }
+.ms-Icon--CheckMark:before { content: "\E73E"; }
+.ms-Icon--Contact:before { content: "\E77B"; }
+.ms-Icon--Go:before { content: "\E8AD"; }
+.ms-Icon--Unfavorite:before { content: "\E8D9"; }
+.ms-Icon--CellPhone:before { content: "\E8EA"; }
+.ms-Icon--SingleBookmark:before { content: "\EDFF"; }
+.ms-Icon--SingleBookmarkSolid:before { content: "\EE00"; }
+.ms-Icon--AddFavorite:before { content: "\F0C8"; }
+.ms-Icon--MailUndelivered:before { content: "\F415"; }
+.ms-Icon--MailTentative:before { content: "\F416"; }
+.ms-Icon--AddBookmark:before { content: "\F5B7"; }
+.ms-Icon--PasswordField:before { content: "\F6AA"; }

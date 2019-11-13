@@ -1,0 +1,59 @@
+/*
+  Your use of the content in the files referenced here is subject to the terms of the license at https://aka.ms/fabric-assets-license
+*/
+@font-face {
+  font-family: 'FabricMDL2Icons';
+  src: url('../fonts/fabric-icons-935ebe02.woff') format('woff');
+}
+
+.ms-Icon {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-family: 'FabricMDL2Icons';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+}
+
+// Mixins
+@mixin ms-Icon--Mail { content: "\E715"; }
+@mixin ms-Icon--Filter { content: "\E71C"; }
+@mixin ms-Icon--Search { content: "\E721"; }
+@mixin ms-Icon--FavoriteList { content: "\E728"; }
+@mixin ms-Icon--FavoriteStar { content: "\E734"; }
+@mixin ms-Icon--FavoriteStarFill { content: "\E735"; }
+@mixin ms-Icon--CheckMark { content: "\E73E"; }
+@mixin ms-Icon--Contact { content: "\E77B"; }
+@mixin ms-Icon--Go { content: "\E8AD"; }
+@mixin ms-Icon--Unfavorite { content: "\E8D9"; }
+@mixin ms-Icon--CellPhone { content: "\E8EA"; }
+@mixin ms-Icon--SingleBookmark { content: "\EDFF"; }
+@mixin ms-Icon--SingleBookmarkSolid { content: "\EE00"; }
+@mixin ms-Icon--AddFavorite { content: "\F0C8"; }
+@mixin ms-Icon--MailUndelivered { content: "\F415"; }
+@mixin ms-Icon--MailTentative { content: "\F416"; }
+@mixin ms-Icon--AddBookmark { content: "\F5B7"; }
+@mixin ms-Icon--PasswordField { content: "\F6AA"; }
+
+
+// Classes
+.ms-Icon--Mail:before { @include ms-Icon--Mail }
+.ms-Icon--Filter:before { @include ms-Icon--Filter }
+.ms-Icon--Search:before { @include ms-Icon--Search }
+.ms-Icon--FavoriteList:before { @include ms-Icon--FavoriteList }
+.ms-Icon--FavoriteStar:before { @include ms-Icon--FavoriteStar }
+.ms-Icon--FavoriteStarFill:before { @include ms-Icon--FavoriteStarFill }
+.ms-Icon--CheckMark:before { @include ms-Icon--CheckMark }
+.ms-Icon--Contact:before { @include ms-Icon--Contact }
+.ms-Icon--Go:before { @include ms-Icon--Go }
+.ms-Icon--Unfavorite:before { @include ms-Icon--Unfavorite }
+.ms-Icon--CellPhone:before { @include ms-Icon--CellPhone }
+.ms-Icon--SingleBookmark:before { @include ms-Icon--SingleBookmark }
+.ms-Icon--SingleBookmarkSolid:before { @include ms-Icon--SingleBookmarkSolid }
+.ms-Icon--AddFavorite:before { @include ms-Icon--AddFavorite }
+.ms-Icon--MailUndelivered:before { @include ms-Icon--MailUndelivered }
+.ms-Icon--MailTentative:before { @include ms-Icon--MailTentative }
+.ms-Icon--AddBookmark:before { @include ms-Icon--AddBookmark }
+.ms-Icon--PasswordField:before { @include ms-Icon--PasswordField }
+

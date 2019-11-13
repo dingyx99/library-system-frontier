@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Contoso Library - Index</title>
+
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/fabric.css" rel="stylesheet" />
+	<link href="css/fabric-icons.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-1">
+						<span class="navbar-toggler-icon"></span>
+					</button> <a class="navbar-brand" href="">Contoso Library</a>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="navbar-nav">
+							<li class="nav-item active">
+								<a class="nav-link" href="/">Index <span class="sr-only">(current)</span></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="search">Search</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/terms">Terms of Use</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="about">About</a>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink"
+									data-toggle="dropdown">Useful Links</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+									<a class="dropdown-item" href="http://www.clcindex.com" target="_blank">CLC
+										Query</a><a class="dropdown-item" href="http://www.nlc.cn"
+										target="_blank">National Library of China</a> <a class="dropdown-item"
+										href="http://www.sxlib.org.cn/" target="_blank">Shaanxi Library</a>
+									<div class="dropdown-divider">
+									</div> <a class="dropdown-item" href="https://lib.nwafu.edu.cn"
+										target="_blank">Library of NWAFU</a>
+								</div>
+							</li>
+
+						</ul>
+
+						<ul class="navbar-nav ml-md-auto">
+							<li class="nav-item active">
+								<a class="nav-link" data-toggle="modal" data-target="#LoginPopUp">Login<span
+										class="sr-only">(current)</span></a>
+							</li>
+							<li class="nav-item active">
+								<a class="nav-link" data-toggle="modal" data-target="#RegisterPopUp">Register<span
+										class="sr-only">(current)</span></a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+				<div class="jumbotron">
+					<h2>
+						Welcome to Contoso Library!
+					</h2>
+					<p>
+						Welcome to Contoso Library! Here you can search, borrow, return book as you like.</br> Just
+						register
+						as a member, no more cost or fees! Want to know more? Simply press button, and let's go!
+					</p>
+
+					<h4>
+						Already our customers?
+					</h4>
+					<p>
+						<a class="btn btn-primary btn-large" data-toggle="modal" data-target="#LoginPopUp">Login</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<h2>
+					Introduction
+				</h2>
+				<p>
+					Welcome to Contoso Library! Here you can search, borrow, return book as you like. Just register
+					as a member, no more cost or fees! Want to know more? Simply press button, and let's go!
+				</p>
+				<p>
+					<a class="btn" href="#">Learn more »</a>
+				</p>
+			</div>
+			<div class="col-md-4">
+				<h2>
+					Heading
+				</h2>
+				<p>
+					Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
+					mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna
+					mollis euismod. Donec sed odio dui.
+				</p>
+				<p>
+					<a class="btn" href="#">View details »</a>
+				</p>
+			</div>
+			<div class="col-md-4">
+				<h2>
+					Heading
+				</h2>
+				<p>
+					Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
+					mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna
+					mollis euismod. Donec sed odio dui.
+				</p>
+				<p>
+					<a class="btn" href="#">View details »</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="LoginPopUp" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Login to Contoso Library</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="mail-logo"><i class="ms-Icon ms-Icon--Mail"
+										aria-hidden="true"></i></span>
+								<input type="email" class="form-control" placeholder="Your email address"
+									aria-label="emailAddress" aria-describedby="basic-addon1" id="loginEmail" autocomplete="email">
+							</div>
+						</div>
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="pass-logo"><i class="ms-Icon ms-Icon--PasswordField"
+									aria-hidden="true"></i></span>
+							<input type="password" class="form-control" placeholder="Your Password"
+								aria-label="password" aria-describedby="basic-addon1" id="loginPassword" autocomplete="current-password">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" onclick="resetLogin();">Reset</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+						data-target="#LoginSuccess">Login</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="LoginSuccess" tabindex="-1" role="dialog" aria-labelledby="loginSuccess" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Success</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+						<p>You've successfully login!</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-toggle="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="RegisterPopUp" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Register as a member of Contoso Library</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-primary" role="alert" id="registerAlert">
+						Please validate your email before continue.
+					</div>
+					<form>
+						<div class="form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="ms-Icon ms-Icon--Mail"
+										aria-hidden="true"></i></span>
+								<input type="email" class="form-control" placeholder="Your email address"
+									aria-label="emailAddress" aria-describedby="basic-addon1" id="regEmail" autocomplete="email">
+								<span class="input-group-btn">
+									<button class="btn btn-info" type="button" id="valemailbutton"
+										onclick="emailValidation();"><i class="ms-Icon ms-Icon--MailTentative"
+											aria-hidden="true" id="emailValStatus"></i></button>
+								</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="ms-Icon ms-Icon--Contact"
+										aria-hidden="true"></i></span>
+								<input type="text" class="form-control" placeholder="Your Username"
+									aria-describedby="basic-addon1" id="regUsername" disabled autocomplete="username">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="ms-Icon--CellPhone"></i></span>
+								<input type="tel" class="form-control" placeholder="Your phone number" aria-roledescription="basic-addon1" id="phoneNum" disabled autocomplete="tel">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="ms-Icon ms-Icon--PasswordField"
+										aria-hidden="true"></i></span>
+								<input type="password" class="form-control" placeholder="Your Password"
+									aria-label="password" aria-describedby="basic-addon1" id="regPass" disabled autocomplete="new-password">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="ms-Icon ms-Icon--PasswordField"
+										aria-hidden="true"></i></span>
+								<input type="password" class="form-control" placeholder="Repeat your password"
+									aria-label="passwordAgain" aria-describedby="basic-addon1" id="regPass2" disabled autocomplete="new-password">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" onclick="resetRegister();">Reset</button>
+					<button type="button" class="btn btn-primary">Register</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/scripts.js"></script>
+	<script src="js/popper.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+{
+  "fontName": "fabric-icons",
+  "fontFamilyName": "FabricMDL2Icons",
+  "excludeGlyphs": false,
+  "excludeThirdPartyIcons": false,
+  "chunkSubsets": false,
+  "hashFontFileName": true,
+  "subsetChunkSettings": {},
+  "glyphs": [
+    {
+      "name": "Mail",
+      "unicode": "E715"
+    },
+    {
+      "name": "Filter",
+      "unicode": "E71C"
+    },
+    {
+      "name": "Search",
+      "unicode": "E721"
+    },
+    {
+      "name": "FavoriteList",
+      "unicode": "E728"
+    },
+    {
+      "name": "FavoriteStar",
+      "unicode": "E734"
+    },
+    {
+      "name": "FavoriteStarFill",
+      "unicode": "E735"
+    },
+    {
+      "name": "CheckMark",
+      "unicode": "E73E"
+    },
+    {
+      "name": "Contact",
+      "unicode": "E77B"
+    },
+    {
+      "name": "Go",
+      "unicode": "E8AD"
+    },
+    {
+      "name": "Unfavorite",
+      "unicode": "E8D9"
+    },
+    {
+      "name": "CellPhone",
+      "unicode": "E8EA"
+    },
+    {
+      "name": "SingleBookmark",
+      "unicode": "EDFF"
+    },
+    {
+      "name": "SingleBookmarkSolid",
+      "unicode": "EE00"
+    },
+    {
+      "name": "AddFavorite",
+      "unicode": "F0C8"
+    },
+    {
+      "name": "MailUndelivered",
+      "unicode": "F415"
+    },
+    {
+      "name": "MailTentative",
+      "unicode": "F416"
+    },
+    {
+      "name": "AddBookmark",
+      "unicode": "F5B7"
+    },
+    {
+      "name": "PasswordField",
+      "unicode": "F6AA"
+    }
+  ]
+}
