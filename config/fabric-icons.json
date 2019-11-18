@@ -78,6 +78,10 @@
     {
       "name": "PasswordField",
       "unicode": "F6AA"
+    },
+    {
+      "name": "Phone",
+      "unicode": "E717"
     }
   ]
 }
