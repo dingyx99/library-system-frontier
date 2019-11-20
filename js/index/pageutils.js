@@ -22,3 +22,9 @@ function toggleModals() {
             break;
     }
 }
+
+function jumpSearch() {
+    var options = $("#search_type option:selected").val();
+    var keyword = $("#search_keyword").val();
+    location.replace("/search.html?type="+options+"?keyword="+keyword);
+}

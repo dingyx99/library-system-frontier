@@ -84,25 +84,28 @@
 					</p>
 				</div>
 				<div class="jumbotron">
-					<label for="search_keyword"><h2>检索书库图书</h2></label>
+					<label for="search_keyword">
+						<h2>检索书库图书</h2>
+					</label>
 					<div class="container text-center">
-							<div class="form-group">
-									<div class="input-group col-xs-12">
-										<div class="input-group-btn">
-											<select name="type" class="form-control" style="width: auto;">
-												<option value="1">全面</option>
-												<option value="2">题名</option>
-												<option value="3">著者</option>
-												<option value="4">ISBN</option>
-											</select>
-										</div>
-										<input type="text" name="keyword" id="search_keyword" class="form-control" placeholder="全面搜索本馆馆藏" autocomplete="off">
-										<span class="input-group-btn">
-											<button class="btn btn-primary" id="search_submit" type="submit"><i class="ms-Icon ms-Icon--Search"
-										aria-hidden="true"></i></button>
-										</span>
-									</div>
+						<div class="form-group">
+							<div class="input-group col-xs-12">
+								<div class="input-group-btn">
+									<select name="type" class="form-control" style="width: auto;" id="search_type">
+										<option value="any">全面</option>
+										<option value="name">题名</option>
+										<option value="author">著者</option>
+										<option value="isbn">ISBN</option>
+									</select>
 								</div>
+								<input type="text" name="keyword" id="search_keyword" class="form-control"
+									placeholder="全面搜索本馆馆藏" autocomplete="off">
+								<span class="input-group-btn">
+									<button class="btn btn-primary" id="search_submit" onclick="jumpSearch();"><i
+											class="ms-Icon ms-Icon--Search" aria-hidden="true"></i></button>
+								</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -172,9 +175,9 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" onclick="reset(1);">重置</button>
+					<button type="button" class="btn btn-danger" onclick="reset(1);" type="reset">重置</button>
 					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="" id="loginButton"
-						disabled>登录</button>
+						disabled type="submit">登录</button>
 				</div>
 			</div>
 		</div>
@@ -257,8 +260,8 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" onclick="reset(2);">重置</button>
-					<button type="button" class="btn btn-secondary" id="regButton" disabled>注册</button>
+					<button type="button" class="btn btn-danger" onclick="reset(2);" type="reset">重置</button>
+					<button type="button" class="btn btn-secondary" id="regButton" disabled type="submit">注册</button>
 				</div>
 			</div>
 		</div>
