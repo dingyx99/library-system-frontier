@@ -9,6 +9,7 @@ request.onload = function() {
     let config = JSON.parse(configJson);
     applyBrand(config);
     toggleModals();
+    loginModify();
 };
 
 function applyBrand(jsonObj){
