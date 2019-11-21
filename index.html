@@ -57,12 +57,12 @@
 
 						<ul class="navbar-nav ml-md-auto">
 							<li class="nav-item active">
-								<a class="nav-link" data-toggle="modal" data-target="#LoginPopUp" id="nav_login_link">读者登录<span
-										class="sr-only">(current)</span></a>
+								<a class="nav-link" data-toggle="modal" data-target="#LoginPopUp"
+									id="nav_login_link">读者登录<span class="sr-only">(current)</span></a>
 							</li>
 							<li class="nav-item active">
-								<a class="nav-link" data-toggle="modal" data-target="#RegisterPopUp" id="nav_reg_link">注册<span
-										class="sr-only">(current)</span></a>
+								<a class="nav-link" data-toggle="modal" data-target="#RegisterPopUp"
+									id="nav_reg_link">注册<span class="sr-only">(current)</span></a>
 							</li>
 						</ul>
 					</div>
@@ -79,8 +79,8 @@
 						已经是本馆读者？
 					</h4>
 					<p>
-						<a class="btn btn-primary btn-large text-white" data-toggle="modal"
-							data-target="#LoginPopUp" id="index_login_button">登录你的账户</a>
+						<a class="btn btn-primary btn-large text-white" data-toggle="modal" data-target="#LoginPopUp"
+							id="index_login_button">登录你的账户</a>
 					</p>
 				</div>
 				<div class="jumbotron">
@@ -156,7 +156,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form action="LoginAction" method="post">
 						<div class="form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="mail-logo"><i class="ms-Icon ms-Icon--Mail"
@@ -176,8 +176,25 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" onclick="reset(1);" type="reset">重置</button>
-					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="" id="loginButton"
-						disabled type="submit">登录</button>
+					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#LoginSuccess"
+						id="loginButton" disabled onclick="login();" type="submit">登录</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="LoginSuccess" tabindex="-1" role="dialog" aria-labelledby="loginSuccess"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">登录</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<p id="loginMsg"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
 				</div>
 			</div>
 		</div>
@@ -211,14 +228,14 @@
 					<div class="alert alert-primary" role="alert" id="registerAlert">
 						请按照要求填写相关信息，完成注册。
 					</div>
-					<form>
+					<form id="regForm" action="RegisterAction" method="post">
 						<div class="form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-info text-white" id="mail-icon"><i
 										class="ms-Icon ms-Icon--Mail" aria-hidden="true"></i></span>
 								<input type="email" class="form-control" placeholder="您的电子邮箱(用于登录)"
 									aria-label="emailAddress" aria-describedby="basic-addon1" id="regEmail"
-									autocomplete="email" onkeyup="onInputValidate(0);">
+									autocomplete="email" onkeyup="onInputValidate(0);" name="regEmail">
 							</div>
 						</div>
 						<div class="form-group">
@@ -227,7 +244,7 @@
 										class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i></span>
 								<input type="text" class="form-control" placeholder="您的用户名:4到16位（字母，数字，下划线，减号）"
 									aria-describedby="basic-addon1" id="regUsername" autocomplete="username"
-									onkeyup="onInputValidate(1);">
+									onkeyup="onInputValidate(1);" name="regUsername">
 							</div>
 						</div>
 						<div class="form-group">
@@ -236,7 +253,7 @@
 										class="ms-Icon ms-Icon--CellPhone" aria-hidden="true"></i></span>
 								<input type="tel" class="form-control" placeholder="您的手机号"
 									aria-roledescription="basic-addon1" id="phoneNum" autocomplete="tel"
-									onkeyup="onInputValidate(2);">
+									onkeyup="onInputValidate(2);" name="phoneNum">
 							</div>
 						</div>
 						<div class="form-group">
@@ -245,7 +262,7 @@
 										class="ms-Icon ms-Icon--PasswordField" aria-hidden="true"></i></span>
 								<input type="password" class="form-control" placeholder="您的密码(8-16位且必须包含数字、大小写字母)"
 									aria-label="password" aria-describedby="basic-addon1" id="regPass"
-									autocomplete="new-password" onkeyup="onInputValidate(3);">
+									autocomplete="new-password" onkeyup="onInputValidate(3);" name="regPass">
 							</div>
 						</div>
 						<div class="form-group">
@@ -254,14 +271,15 @@
 										class="ms-Icon ms-Icon--PasswordField" aria-hidden="true"></i></span>
 								<input type="password" class="form-control" placeholder="请重复一遍您的密码"
 									aria-label="passwordAgain" aria-describedby="basic-addon1" id="regPass2"
-									autocomplete="new-password" onkeyup="onInputValidate(4);">
+									autocomplete="new-password" onkeyup="onInputValidate(4);" name="regPass2">
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" onclick="reset(2);" type="reset">重置</button>
-					<button type="button" class="btn btn-secondary" id="regButton" disabled type="submit">注册</button>
+					<button type="button" class="btn btn-secondary" id="regButton" disabled type="submit"
+						onclick="register();">注册</button>
 				</div>
 			</div>
 		</div>
