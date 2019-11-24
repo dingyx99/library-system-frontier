@@ -10,6 +10,9 @@
 
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap-select/1.13.11/css/bootstrap-select.min.css">
+	<link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap-notify/0.2.0/css/bootstrap-notify.min.css">
+	<link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap-notify/0.2.0/css/styles/alert-bangtidy.min.css">
+	<link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap-notify/0.2.0/css/styles/alert-blackgloss.min.css">
 	<link href="css/style.css" rel="stylesheet">
 	<link href="css/fabric.css" rel="stylesheet" />
 	<link href="css/fabric-icons.css" rel="stylesheet">
@@ -17,7 +20,7 @@
 </head>
 
 <body>
-
+	<div class='notifications top-right'></div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -93,6 +96,59 @@
 						</div>
 					</div>
 				</div>
+				<div style="display: none;" id="search-results-area">
+					<div class="card-header">
+						<h3>你搜索的内容是 <span id="keyword-display">{{search-keyword}}</span> ，结果如下：</h3>
+					</div>
+					<div class="mx-auto" id="search-item">
+						<table class="table table-hover table-reponsive" >
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>书名</th>
+									<th>作者</th>
+									<th>ISBN</th>
+									<th>当前状态</th>
+									<th>收藏</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>情书</td>
+									<td>[日]岩井俊二</td>
+									<td>9787544292870</td>
+									<td class="text-info">可供借阅</td>
+									<td><i class="ms-Icon ms-Icon--AddFavorite" aria-hidden="true" id="favIcon1" onclick="toggleFav('favIcon1');"></i></td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>烟花</td>
+									<td>[日]岩井俊二</td>
+									<td>9787550025264</td>
+									<td class="text-warning">已经出借</td>
+									<td><i class="ms-Icon ms-Icon--AddFavorite" aria-hidden="true" id="favIcon2" onclick="toggleFav('favIcon2');"></i></td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>花与爱丽丝杀人事件</td>
+									<td>[日]岩井俊二</td>
+									<td>9787505737655</td>
+									<td class="text-danger">不提供外借</td>
+									<td><i class="ms-Icon ms-Icon--AddFavorite" aria-hidden="true" id="favIcon3" onclick="toggleFav('favIcon3');"></i></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -136,6 +192,7 @@
 			</div>
 		</div>
 	</div>
+	
 
 
 	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
@@ -143,6 +200,7 @@
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="https://cdn.staticfile.org/bootstrap-select/1.13.11/js/bootstrap-select.min.js"></script>
 	<script src="https://cdn.staticfile.org/bootstrap-select/1.13.11/js/i18n/defaults-zh_CN.min.js"></script>
+	<script src="https://cdn.staticfile.org/bootstrap-notify/0.2.0/js/bootstrap-notify.min.js"></script>
 	<script src="js/search/fetchConfig.js"></script>
 	<script src="js/search/pageutils.js"></script>
 </body>

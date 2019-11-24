@@ -26,7 +26,7 @@ function toggleModals() {
 function jumpSearch() {
     var options = $("#search_type option:selected").val();
     var keyword = $("#search_keyword").val();
-    location.replace("/search.html?type=" + options + "?keyword=" + keyword);
+    location.replace("/search.html?type=" + options + "&keyword=" + keyword);
 }
 
 function setCookie(name, value, path, domain, secure) {

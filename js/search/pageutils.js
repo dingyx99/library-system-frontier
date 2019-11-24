@@ -22,5 +22,38 @@ function jumpToIndex(){
 function jumpSearch() {
     var options = $("#search_type option:selected").val();
     var keyword = $("#search_keyword").val();
-    location.replace("/search.html?type="+options+"?keyword="+keyword);
+    location.replace("/search.html?type="+options+"&keyword="+keyword);
 }
+
+function ifBlank() {
+    if(getQueryVariable("keyword") == "") {
+        return true;
+    }
+    return false;
+}
+
+function getSearchKeyword() {
+    if(!ifBlank()) {
+        return decodeURIComponent(getQueryVariable("keyword"));
+    }
+    return null;
+}
+
+function toggleFav(id) {
+    let jQueryId = "#" + id
+    if($(jQueryId).attr("class") == "ms-Icon ms-Icon--AddFavorite"){
+        document.getElementById(id).className="ms-Icon ms-Icon--FavoriteStarFill"
+            $('.top-right').notify({
+                message: { text: 'Aw yeah, It works!' }
+            }).show();
+    }
+    else {
+        document.getElementById(id).className="ms-Icon ms-Icon--AddFavorite"
+    }
+}
+
+$(document).keypress(function (e) {
+    if(e.keyCode == 13) {
+        jumpSearch();
+    }
+})
