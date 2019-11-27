@@ -53,8 +53,8 @@ function getCookie(cName) {
     for (var i = 0; i < cookieArray.length; i++) {
         var cookieNum = cookieArray[i].split("=");
 
-        var cookieName = cookieNum[0].trim();
-        var cookieValue = cookieNum[1].trim();
+        var cookieName = $.trim(cookieNum[0]);
+        var cookieValue = $.trim(cookieNum[1]);
 
         if(cookieName == cName){
             return cookieValue;
