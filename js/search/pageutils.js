@@ -40,7 +40,8 @@ function getSearchKeyword() {
 }
 
 function toggleFav(id) {
-    let jQueryId = "#" + id
+    let realId = "favicon" + id
+    let jQueryId = "#" + realId
     if($(jQueryId).attr("class") == "ms-Icon ms-Icon--AddFavorite"){
         document.getElementById(id).className="ms-Icon ms-Icon--FavoriteStarFill"
             $('.top-right').notify({
