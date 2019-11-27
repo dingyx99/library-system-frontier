@@ -24,6 +24,8 @@ function showDetailsPage() {
         document.getElementById("search-results-area").style.display="";
         document.getElementById("keyword-display").innerHTML=getSearchKeyword();
         $("#search_keyword").val(getSearchKeyword());
+        showTestSearchResults(); //For test
+        //showSearchResults(); //Release, currently off
     }
 }
 //Remember to delete before release
