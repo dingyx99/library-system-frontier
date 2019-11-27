@@ -26,6 +26,39 @@ function showDetailsPage() {
         $("#search_keyword").val(getSearchKeyword());
     }
 }
+//Remember to delete before release
+function showTestSearchResults() {
+    var StatusInfo = ['<td class="text-danger">不再提供本书</td>','<td class="text-info">可供借阅</td>','<td class="text-warning">已经出借</td>','<td class="text-danger">本书不提供外借</td>'];
+    $(function(){
+        $.ajax({
+            url: '/testSearchQuery.json', //Remember to delete file before release
+            type: 'GET',
+            data: {
+                method: 'query'
+            },
+            dataType: 'json',
+            success: function(data){
+                var obj = eval(data);
+                var tbody= $('<tbody></tbody>');
+                $(obj).each(function(index){
+                    var newIndex = index + 1;
+                    var val = obj[index];
+                    var tr = $('<tr></tr>');
+                    
+                    tr.append('<td>' + newIndex + '</td>');     //Index
+                    tr.append('<td>' + val.name + '</td>');     //Name
+                    tr.append('<td>' + val.author + '</td>');   //Author
+                    tr.append('<td>' + val.isbn + '</td>');     //ISBN
+                    tr.append('<td>' + val.clc + '/' + val.gcbh + '</td>');    //CLC Number
+                    tr.append(StatusInfo[convertStatus(val.status, val.inlib)]);    //Show out staus
+                    tr.append('<td><i class="ms-Icon ms-Icon--AddFavorite" aria-hidden="true" id="favIcon' + index + '" onclick="toggleFav(' + index + ');"></i></td>')    //Fav icon
+                    tbody.append(tr);
+                });
+                $('#search-results-form tbody').replaceWith(tbody);
+            }
+        });
+    });
+}
 
 function showSearchResults() {
     var StatusInfo = ['<td class="text-danger">不再提供本书</td>','<td class="text-info">可供借阅</td>','<td class="text-warning">已经出借</td>','<td class="text-danger">本书不提供外借</td>'];
@@ -41,9 +74,17 @@ function showSearchResults() {
                 var obj = eval(data);
                 var tbody= $('<tbody></tbody>');
                 $(obj).each(function(index){
+                    var newIndex = index + 1;
                     var val = obj[index];
                     var tr = $('<tr></tr>');
-                    tr.append('<td>' + index + '</td>' + '<td>' + val.name + '</td>' + '<td>' + val.author + '</td>' + '<td>' + val.isbn + '</td>' + '<td>' + val.clc + '/' + val.gcbh + '</td>' + '<td>' + StatusInfo[convertStatus(val.status, val.inlib)] + '</td>' + '<td><i class="ms-Icon ms-Icon--AddFavorite" aria-hidden="true" id="favIcon' + index + '" onclick="toggleFav(' + index + ');"></i>');
+                    
+                    tr.append('<td>' + newIndex + '</td>');     //Index
+                    tr.append('<td>' + val.name + '</td>');     //Name
+                    tr.append('<td>' + val.author + '</td>');   //Author
+                    tr.append('<td>' + val.isbn + '</td>');     //ISBN
+                    tr.append('<td>' + val.clc + '/' + val.gcbh + '</td>');    //CLC Number
+                    tr.append(StatusInfo[convertStatus(val.status, val.inlib)]);    //Show out staus
+                    tr.append('<td><i class="ms-Icon ms-Icon--AddFavorite" aria-hidden="true" id="favIcon' + index + '" onclick="toggleFav(' + index + ');"></i></td>')    //Fav icon
                     tbody.append(tr);
                 });
                 $('#search-results-form tbody').replaceWith(tbody);
@@ -63,7 +104,7 @@ function convertStatus(status, inlib){
         return 2;
     }
     else if(status == false && inlib == true) {
-        return 4;
+        return 3;
     }
     return 0;
 }

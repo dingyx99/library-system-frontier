@@ -28,7 +28,7 @@ function jumpSearch() {
     var keyword = $("#search_keyword").val();
     location.replace("/search.html?type=" + options + "&keyword=" + keyword);
 }
-
+//Remember to delete before release
 function setCookie(name, value, path, domain, secure) {
     var date = new Date();
     date.setTime(date.getTime() + 7200000);
@@ -47,7 +47,6 @@ function loginStatCheck() {
 }
 
 function getCookie(cName) {
-    //LoginEmail, LoginPassword, LoginUsername
     var cookieString = decodeURI(document.cookie);
     var cookieArray = cookieString.split(";");
     for (var i = 0; i < cookieArray.length; i++) {
@@ -63,6 +62,7 @@ function getCookie(cName) {
     return false;
 }
 
+//Remember to delete before release
 function createTestCookie() {
     setCookie("LoginEmail", "test@contoso.com", "/", "127.0.0.1", "");
     setCookie("LoginPassword", "Test123", "/", "127.0.0.1", "");

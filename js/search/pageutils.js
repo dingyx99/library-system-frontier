@@ -40,16 +40,16 @@ function getSearchKeyword() {
 }
 
 function toggleFav(id) {
-    let realId = "favicon" + id
+    let realId = "favIcon" + id
     let jQueryId = "#" + realId
     if($(jQueryId).attr("class") == "ms-Icon ms-Icon--AddFavorite"){
-        document.getElementById(id).className="ms-Icon ms-Icon--FavoriteStarFill"
+        document.getElementById(realId).className="ms-Icon ms-Icon--FavoriteStarFill"
             $('.top-right').notify({
                 message: { text: 'Aw yeah, It works!' }
             }).show();
     }
     else {
-        document.getElementById(id).className="ms-Icon ms-Icon--AddFavorite"
+        document.getElementById(realId).className="ms-Icon ms-Icon--AddFavorite"
     }
 }
 
