@@ -12,10 +12,10 @@ function getQueryVariable(variable) {
 
 function jumpToIndex(){
     $("#JumpLoginPopUp").on('shown.bs.modal', function(){
-        window.open("/index.html?action=login");
+        window.open("./index.html?action=login");
     })
     $('#JumpRegisterPopUp').on('shown.bs.modal', function(){
-        window.open("/index.html?action=register");
+        window.open("./index.html?action=register");
     })
 }
 

@@ -63,10 +63,12 @@ function showTestSearchResults() {
 }
 
 function showSearchResults() {
+    var type = getQueryVariable("type");
+	var keyword = getQueryVariable("keyword");
     var StatusInfo = ['<td class="text-danger">不再提供本书</td>','<td class="text-info">可供借阅</td>','<td class="text-warning">已经出借</td>','<td class="text-danger">本书不提供外借</td>'];
     $(function(){
         $.ajax({
-            url: '../SearchAction',
+            url: '../SearchAction?type=' + type + "&keyword=" + keyword,
             type: 'GET',
             data: {
                 method: 'query'
