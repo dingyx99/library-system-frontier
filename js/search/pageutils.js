@@ -43,13 +43,12 @@ function toggleFav(id) {
     let realId = "favIcon" + id
     let jQueryId = "#" + realId
     if($(jQueryId).attr("class") == "ms-Icon ms-Icon--AddFavorite"){
-        document.getElementById(realId).className="ms-Icon ms-Icon--FavoriteStarFill"
-            $('.top-right').notify({
-                message: { text: 'Aw yeah, It works!' }
-            }).show();
+        document.getElementById(realId).className="ms-Icon ms-Icon--FavoriteStarFill";
+        generateNotification('info', '<strong>操作成功</strong>', '成功加入收藏！');
     }
     else {
-        document.getElementById(realId).className="ms-Icon ms-Icon--AddFavorite"
+        document.getElementById(realId).className="ms-Icon ms-Icon--AddFavorite";
+        generateNotification('info', '<strong>操作成功</strong>', '成功取消收藏！');
     }
 }
 
@@ -58,3 +57,17 @@ $(document).keypress(function (e) {
         jumpSearch();
     }
 })
+
+function generateNotification(type, title, message) {
+    $.notify({
+        title: title,
+        message: message,
+    },{
+        type: type
+    }, {
+        animate: {
+            enter: 'animated bounceInDown',
+            exit: 'animated bounceOutUp'
+        }
+    });
+}
