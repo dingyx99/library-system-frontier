@@ -1,30 +1,3 @@
-function getQueryVariable(variable) {
-    var query = window.location.search.substring(1);
-    var vars = query.split("&");
-    for (var i = 0; i < vars.length; i++) {
-        var pair = vars[i].split("=");
-        if (pair[0] == variable) {
-            return pair[1];
-        }
-    }
-    return (false);
-}
-
-function jumpToIndex(){
-    $("#JumpLoginPopUp").on('shown.bs.modal', function(){
-        window.open("./index.html?action=login");
-    })
-    $('#JumpRegisterPopUp').on('shown.bs.modal', function(){
-        window.open("./index.html?action=register");
-    })
-}
-
-function jumpSearch() {
-    var options = $("#search_type option:selected").val();
-    var keyword = $("#search_keyword").val();
-    location.replace("./search.html?type="+options+"&keyword="+keyword);
-}
-
 function ifBlank() {
     if(getQueryVariable("keyword") == "") {
         return true;
@@ -42,14 +15,20 @@ function getSearchKeyword() {
 function toggleFav(id) {
     let realId = "favIcon" + id
     let jQueryId = "#" + realId
-    if($(jQueryId).attr("class") == "ms-Icon ms-Icon--AddFavorite"){
-        document.getElementById(realId).className="ms-Icon ms-Icon--FavoriteStarFill";
-        generateNotification('info', '<strong>操作成功</strong>', '成功加入收藏！');
+    if(loginStatCheck()){
+        if($(jQueryId).attr("class") == "ms-Icon ms-Icon--AddFavorite"){
+            document.getElementById(realId).className="ms-Icon ms-Icon--FavoriteStarFill";
+            generateNotification('info', '<strong>操作成功</strong>', '<p>成功加入收藏！</p>');
+        }
+        else {
+            document.getElementById(realId).className="ms-Icon ms-Icon--AddFavorite";
+            generateNotification('info', '<strong>操作成功</strong>', '<p>成功取消收藏！</p>');
+        }
     }
-    else {
-        document.getElementById(realId).className="ms-Icon ms-Icon--AddFavorite";
-        generateNotification('info', '<strong>操作成功</strong>', '成功取消收藏！');
+    else if(loginStatCheck() == false){
+        generateNotification('danger', '<strong>操作失败</strong>', '<p>您未登录账户，无法操作，请先登录或注册后重试。</p>')
     }
+    
 }
 
 $(document).keypress(function (e) {
@@ -61,9 +40,10 @@ $(document).keypress(function (e) {
 function generateNotification(type, title, message) {
     $.notify({
         title: title,
-        message: message,
-    },{
-        type: type
+        message: message
+        },{
+        type: type,
+        delay: 3000,
     }, {
         animate: {
             enter: 'animated bounceInDown',

@@ -8,6 +8,7 @@ request.onload = function () {
     let configJson = request.response;
     let config = JSON.parse(configJson);
     applyBrand(config);
+    loginModify();
     jumpToIndex();
     showDetailsPage();
 };
