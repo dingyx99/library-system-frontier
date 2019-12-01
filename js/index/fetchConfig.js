@@ -11,6 +11,7 @@ request.onload = function () {
     applyBrand(config);
     toggleModals();
     indexLoginModify();
+    hitokoto("hitokoto-content", "hitokoto-from");
 };
 
 function applyBrand(jsonObj) {

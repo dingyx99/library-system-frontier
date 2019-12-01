@@ -40,6 +40,26 @@ function generateUniversalNotification(type, title, message) {
     });
 }
 
+function hitokoto(contentId, fromId) {
+    $(function(){
+        $.ajax({
+            url: 'https://v1.hitokoto.cn/?c=d',
+            type: 'GET',
+            data: {
+                method: 'query'
+            },
+            dataType: 'json',
+            success: function(data){
+                var obj = eval(data);
+                var content = obj.hitokoto;
+                var from = obj.from;
+                document.getElementById(contentId).innerHTML = content;
+                document.getElementById(fromId).innerHTML = from;
+            }
+        })
+    })
+}
+
 function showGreetings() {
     now = new Date();
     hour = now.getHours();
