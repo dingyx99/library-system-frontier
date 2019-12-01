@@ -18,7 +18,7 @@
 
 </head>
 
-<body>
+<body onload="pageInit();">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -70,89 +70,173 @@
                 <p> </p>
                 <p> </p>
                 <div style="display: none;" id="my-info-area">
-                    <div class="card">
-                        <div class="card-header">读者基本信息</div>
-                        <div class="card-body">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">用户名</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1"
-                                    id="myUsername" disabled>
-                            </div>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">读者证编号</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1"
-                                    id="myReaderId" disabled>
-                            </div>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">邮箱</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon10"
-                                    id="myEmail" disabled>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">概况</div>
+                                <div class="card-body">
+                                    <p><span id="greetings">{{Greetings}}</span>，<span
+                                            id="greetings-user-name">{{Username}}</span>！</p>
+                                    <p>您当前已借图书<span id="info-rent-book-num">{{number}}</span>本，有<span
+                                            id="info-reach-time-num">{{number}}</span>本即将在7天内到期，请及时归还。</p>
+                                    <p>您当前一共收藏了<span id="fav-book-num">{{fav-number}}</span>本书。</p>
+                                    <p>您当前有<span id="overdue-number">{{overdue-number}}</span>本逾期记录等待处理。</p>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">基本信息</div>
+                                <div class="card-body">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">用户名</span>
+                                        <input type="text" class="form-control" placeholder=""
+                                            aria-describedby="basic-addon1" id="myUsername" disabled>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">读者证编号</span>
+                                        <input type="text" class="form-control" placeholder=""
+                                            aria-describedby="basic-addon1" id="myReaderId" disabled>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">邮箱</span>
+                                        <input type="text" class="form-control" placeholder=""
+                                            aria-describedby="basic-addon1" id="myEmail" disabled>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">可借阅总数</span>
+                                        <input type="text" class="form-control" placeholder=""
+                                            aria-describedby="basic-addon1" id="myBorrowSum" disabled>
+                                    </div>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">用户角色</span>
+                                        <input type="text" class="form-control" placeholder=""
+                                            aria-describedby="basic-addon1" id="myRole" disabled>
+                                    </div>
+                                </div>
 
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    我的读者证二维码
+                                </div>
+                                <div class="card-body">
+                                    <div id="qrcode-area"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="card-link" data-toggle="collapse" href="#borrow-records">借阅记录总览</a>
+                                </div>
+                                <div id="borrow-records" class="collapse">
+                                    <div class="card-body">
+                                        <table class="table table-hover table-reponsive" id="borrow-records-form">
+                                            <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>书名</th>
+                                                    <th>当前状态</th>
+                                                    <th>借阅时间</th>
+                                                    <th>到期时间</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="card-lik" data-toggle="collapse" href="#fav-records">收藏记录总览</a>
+                                </div>
+                                <div id="fav-records" class="collapse">
+                                    <div class="card-body">
+                                        <table class="table table-hover table-reponsive" id="fav-records-form">
+                                            <thead>
+                                                <tr>
+                                                    <th>序号</th>
+                                                    <th>书名</th>
+                                                    <th>收藏时间</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card">
                         <div class="card-header">
-                            我的读者证二维码
+                            <a class="card-link" data-toggle="collapse" href="#adminPortal">只有管理员知道的地方</a>
                         </div>
-                        <div class="card-body">
-                            <div id="qrcode-area"></div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">只有管理员知道的地方</div>
-                        <div class="card-body">
-                            <div class="container">
-                                <div id="accordion">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <a class="card-link" data-toggle="collapse" href="#collapseOut">
-                                                图书出借登记
-                                            </a>
-                                        </div>
-                                        <div id="collapseOut" class="collapse show" data-parent="#accordion">
-                                            <div class="card-body">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">读者证编号</span>
-                                                    <input type="text" class="form-control" placeholder=""
-                                                        aria-describedby="basic-addon1" id="outReaderId">
-                                                </div>
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">图书编号</span>
-                                                    <input type="text" class="form-control" placeholder=""
-                                                        aria-describedby="basic-addon1" id="outBookId">
-                                                </div>
-                                                <button type="button" class="btn btn-primary" id="outButton"
-                                                    onclick="alert('success')">出借</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <a class="collapsed card-link" data-toggle="collapse" href="#collapseIn">
-                                                图书归还登记
-                                            </a>
-                                        </div>
-                                        <div id="collapseIn" class="collapse" data-parent="#accordion">
-                                            <div class="card-body">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">读者证编号</span>
-                                                    <input type="text" class="form-control" placeholder=""
-                                                        aria-describedby="basic-addon1" id="inReaderId">
-                                                </div>
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">图书编号</span>
-                                                    <input type="text" class="form-control" placeholder=""
-                                                        aria-describedby="basic-addon1" id="inBookId">
-                                                </div>
-                                                <button type="button" class="btn btn-primary" id="inButton"
-                                                    onclick="alert('success')">归还</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
+                        <div id="adminPortal" class="collapse">
+                            <div class="card-body">
+                                <div class="container">
+                                    <div id="accordion">
+                                        <div class="card">
                                             <div class="card-header">
-                                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseModify">
+                                                <a class="card-link" data-toggle="collapse" href="#collapseOut">
+                                                    图书出借登记
+                                                </a>
+                                            </div>
+                                            <div id="collapseOut" class="collapse show" data-parent="#accordion">
+                                                <div class="card-body">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">读者证编号</span>
+                                                        <input type="text" class="form-control" placeholder=""
+                                                            aria-describedby="basic-addon1" id="outReaderId">
+                                                    </div>
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">图书编号</span>
+                                                        <input type="text" class="form-control" placeholder=""
+                                                            aria-describedby="basic-addon1" id="outBookId">
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary" id="outButton"
+                                                        onclick="alert('success')">出借</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <a class="collapsed card-link" data-toggle="collapse"
+                                                    href="#collapseIn">
+                                                    图书归还登记
+                                                </a>
+                                            </div>
+                                            <div id="collapseIn" class="collapse" data-parent="#accordion">
+                                                <div class="card-body">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">读者证编号</span>
+                                                        <input type="text" class="form-control" placeholder=""
+                                                            aria-describedby="basic-addon1" id="inReaderId">
+                                                    </div>
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">图书编号</span>
+                                                        <input type="text" class="form-control" placeholder=""
+                                                            aria-describedby="basic-addon1" id="inBookId">
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary" id="inButton"
+                                                        onclick="alert('success')">归还</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <a class="collapsed card-link" data-toggle="collapse"
+                                                    href="#collapseModify">
                                                     图书信息修改
                                                 </a>
                                             </div>
@@ -173,6 +257,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -183,13 +268,15 @@
                 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
                 <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
                 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-                <script src="https://cdn.staticfile.org/bootstrap-select/1.13.11/js/bootstrap-select.min.js"></script>
+                <script src="https://cdn.staticfile.org/bootstrap-select/1.13.11/js/bootstrap-select.min.js">
+                </script>
                 <script src="https://cdn.staticfile.org/bootstrap-select/1.13.11/js/i18n/defaults-zh_CN.min.js">
                 </script>
                 <script src="https://cdn.staticfile.org/mouse0270-bootstrap-notify/3.1.7/bootstrap-notify.min.js">
                 </script>
                 <script src="js/my/fetchConfig.js"></script>
                 <script src="js/my/qrcode.min.js"></script>
+                <script src="js/my/pageutils.js"></script>
                 <script src="js/cookiesUtils.js"></script>
                 <script src="js/pageUtils.js"></script>
 </body>

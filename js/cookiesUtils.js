@@ -60,7 +60,7 @@ function loginModify() {
         var username = getCookie("LoginUsername");
         document.getElementById("nav_login_link").innerHTML = "欢迎您， " + username;
         document.getElementById("nav_login_link").removeAttribute("data-target");
-        document.getElementById("nav_login_link").setAttribute("onclick", "");
+        document.getElementById("nav_login_link").setAttribute("onclick", "window.location.href='./my.html';");
         document.getElementById("nav_reg_link").innerHTML = "登出";
         document.getElementById("nav_reg_link").removeAttribute("data-target");
         document.getElementById("nav_reg_link").setAttribute("onclick", "logout();");
