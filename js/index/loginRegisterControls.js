@@ -164,4 +164,6 @@ function login() {
     }
     req.open("get", "../LoginAction?loginEmail=" + loginEmail + "&loginPass=" + loginPass);
     req.send(null);
+
+    generateNotification('info', '<strong>登录成功</strong>', '<p>成功登录，欢迎回来，等待重新加载...</p>', reloadInterval());
 }

@@ -40,11 +40,13 @@ function getCookie(cName) {
 }
 
 function logout(){
-    clearCookie("LoginEmail");
-    clearCookie("LoginPassword");
-    clearCookie("LoginUsername");
-    generateNotification('info', '<strong>操作成功</strong>', '成功登出，等待重新加载...', reloadInterval());
-    
+	var req = getXMLHttpRequest();
+	req.open("GET", "../LogoutAction");
+	req.send(null);
+//    clearCookie("LoginEmail");
+//    clearCookie("LoginPassword");
+//    clearCookie("LoginUsername");
+    generateNotification('info', '<strong>操作成功</strong>', '<p>您已成功登出，等待重新加载...</p>', reloadInterval());
 }
 
 //Remember to delete before release
