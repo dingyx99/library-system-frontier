@@ -1,32 +1,29 @@
-var userID = ""
-var userRole = "b1f707d4-bff4-4670-a0e4-21ddc812bf69";
-
 function loadData() {
     try {
         loadGreetingData();
     } catch (error) {
-        var errorString = "<p>加载问候信息时出现错误，以下为可能有用的信息：</p><p>" + error.message + "</p>";
+        var errorString = "<p>加载问候信息时出现错误，以下为可能有用的信息：</p><p>" + error + "</p>";
         generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
     }
 
     try {
         loadUserDetails();
     } catch (error) {
-        var errorString = "<p>加载用户详细信息时出现错误，以下为可能有用的信息：</p><p>" + error.message + "</p>";
+        var errorString = "<p>加载用户详细信息时出现错误，以下为可能有用的信息：</p><p>" + error + "</p>";
         generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
     }
 
     try {
         loadBorrowData();
     } catch (error) {
-        var errorString = "<p>加载用户借阅信息时出现错误，以下为可能有用的信息：</p><p>" + error.message + "</p>";
+        var errorString = "<p>加载用户借阅信息时出现错误，以下为可能有用的信息：</p><p>" + error + "</p>";
         generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
     }
 
     try {
         loadFavData();
     } catch (error) {
-        var errorString = "<p>加载用户收藏信息时出现错误，以下为可能有用的信息：</p><p>" + error.message + "</p>";
+        var errorString = "<p>加载用户收藏信息时出现错误，以下为可能有用的信息：</p><p>" + error + "</p>";
         generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
     }
 
@@ -53,8 +50,7 @@ function loadGreetingData() {
                 console.log("Successfully parsed user info.")
             },
             error: function (xhr) {
-                var errorString = "<p>加载问候信息时出现错误，以下为可能有用的信息：</p><p>" + xhr.status + " " + xhr.statusText + "</p>";
-                generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
+                throw err = new Error("Error with LOAD GREET: " + xhr.status + " " + xhr.statusText);
             }
         })
     })
@@ -91,19 +87,16 @@ function loadUserDetails() {
                 var base = new Base64();
                 userIdBundle = base.encode(str);
                 console.log("Successfully generated user Qr info.")
-                userID = obj.id;
-                userRole = role;
             },
             error: function (xhr) {
-                var errorString = "<p>加载用户详细信息时出现错误，以下为可能有用的信息：</p><p>" + xhr.status + " " + xhr.statusText + "</p>";
-                generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
+                throw err = new Error("Error with LOAD BORROW: " + xhr.status + " " + xhr.statusText);
             }
         })
     })
 }
 
 function isAdmin() {
-    if (userRole == "924a86a5-58b2-4158-b487-a567040f8df8") {
+    if (getUserInfo("role") == "924a86a5-58b2-4158-b487-a567040f8df8") {
         return true;
     } else {
         return false;
@@ -113,7 +106,7 @@ function isAdmin() {
 function loadBorrowData() {
     $(function () {
         $.ajax({
-            url: '../GetBorrowMesAction?userId=' + userID,
+            url: '../GetBorrowMesAction?userId=' + getUserInfo("id"),
             type: 'GET',
             data: {
                 method: 'query'
@@ -143,8 +136,7 @@ function loadBorrowData() {
                 console.log("Successfully parsed borrow data form.");
             },
             error: function (xhr) {
-                var errorString = "<p>加载用户借阅信息时出现错误，以下为可能有用的信息：</p><p>" + xhr.status + " " + xhr.statusText + "</p>";
-                generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
+                throw err = new Error("Error with LOAD BORROW: " + xhr.status + " " + xhr.statusText);
             }
         })
     })
@@ -153,7 +145,7 @@ function loadBorrowData() {
 function loadFavData() {
     $(function () {
         $.ajax({
-            url: '../GetFavoriteMesAction?userId=' + userID,
+            url: '../GetFavoriteMesAction?userId=' + getUserInfo("id"),
             type: 'GET',
             data: {
                 method: 'query'
@@ -170,19 +162,106 @@ function loadFavData() {
                     tr.append('<td>' + newIndex + '</td>'); //Index
                     tr.append('<td>' + val.bookIsbn + '</td>'); //BookISBN(name)
                     tr.append('<td>' + val.favDate.slice(0, 10) + '</td>'); //FavTime
-                    tr.append('<td><i class="ms-Icon ms-Icon--Unfavorite" aria-hidden="true" id="unfavIcon' + index + '" onclick="unFav(' + index + ');"><i></td>'); //Unfav item
+                    tr.append('<td><i class="ms-Icon ms-Icon--Unfavorite" aria-hidden="true" id="unfavIcon' + index + '" onclick="unFav(' + val.bookIsbn + ');"><i></td>'); //Unfav item
                     tbody.append(tr);
                 });
                 $('#fav-records-form tbody').replaceWith(tbody);
                 console.log("Successfully parsed fav data form.");
             },
             error: function (xhr) {
-                var errorString = "<p>加载用户收藏信息时出现错误，以下为可能有用的信息：</p><p>" + xhr.status + " " + xhr.statusText + "</p>";
-                generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
+                throw err = new Error("Error with LOAD FAV: " + xhr.status + " " + xhr.statusText);
             }
         })
     })
+
 }
+
+function unFav(bookIsbn) {
+    userId = getUserInfo("id");
+    try {
+        FavoriteActions("delete", userId, bookIsbn);
+        generateNotification('info', '<strong>操作成功</strong>', '<p>成功取消收藏！</p>', reloadInterval());
+    } catch (error) {
+        var errorString = "<p>操作失败，以下提示可能有助于修复错误：</p>" + error + "</p>";
+        generateUniversalNotification("danger", "<strong>取消收藏操作失败</strong>", errorString)
+    }
+}
+
+function bookProcess(type) {
+    if (!isAdmin()) {
+        generateUniversalNotification("danger", "<strong>权限不足</strong>", "<p>您的用户权限不足以执行本操作。</p>");
+    } else {
+        if (type == "out") {
+            try {
+                outReaderId = document.getElementById("outReaderId").val();
+                outBookId = document.getElementById("outBookId").val();
+                if (outReaderId == "" || outBookId == "") {
+                    generateUniversalNotification("danger", "<strong>出借失败</strong>", "<p>信息填写不完整，请检查后重试。</p>");
+                } else {
+                    $(function () {
+                        $.ajax({
+                            url: '../SysManagerAction?type=out&userId=' + outReaderId + 'bookIsbn=' + outBookId,
+                            type: 'GET',
+                            data: {
+                                method: 'query'
+                            },
+                            success: function () {
+                                generateUniversalNotification("success", "<strong>出借成功</strong>");
+                            },
+                            error: function (xhr) {
+                                throw err = new Error("Error with OUT: " + xhr.status + " " + xhr.statusText);
+                            }
+                        })
+                    })
+                }
+            } catch (error) {
+                var errorString = "<p>操作出现错误，请检查填写的信息是否正确。以下提示可能有助于修复错误：</p><p>" + error + "</p>";
+                generateUniversalNotification("danger", "<strong>出借失败</strong>", errorString)
+            }
+        } else if (type == "in") {
+            try {
+                inReaderId = document.getElementById("inReaderId").val();
+                inBookId = document.getElementById("inBookId").val();
+                if (inReaderId == "" || inBookId == "") {
+                    generateUniversalNotification("danger", "<strong>归还失败</strong>", "<p>信息填写不完整，请检查后重试。</p>");
+                } else {
+                    $(function () {
+                        $.ajax({
+                            url: '../SysManagerAction?type=back&userId=' + outReaderId + 'bookIsbn=' + outBookId,
+                            type: 'GET',
+                            data: {
+                                method: 'query'
+                            },
+                            success: function () {
+                                generateUniversalNotification("success", "<strong>归还成功</strong>");
+                            },
+                            error: function (xhr) {
+                                throw err = new Error("Error with IN: " + xhr.status + " " + xhr.statusText);
+                            }
+                        })
+                    })
+                }
+
+            } catch (error) {
+                var errorString = "<p>操作出现错误，请检查填写的信息是否正确。以下提示可能有助于修复错误：</p><p>" + error + "</p>";
+                generateUniversalNotification("danger", "<strong>归还失败</strong>", errorString)
+            }
+        } else {
+            generateUniversalNotification("danger", "<strong>参数错误</strong>", "<p>图书处理操作参数传递错误，如遇此问题，请反馈给开发者。</p>");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 function Base64() {
 
@@ -285,72 +364,5 @@ function Base64() {
             }
         }
         return string;
-    }
-}
-
-function bookProcess(type) {
-    if (!isAdmin()) {
-        generateUniversalNotification("danger", "<strong>权限不足</strong>", "<p>您的用户权限不足以执行本操作。</p>");
-    } else {
-        if (type == "out") {
-            try {
-                outReaderId = document.getElementById("outReaderId").val();
-                outBookId = document.getElementById("outBookId").val();
-                if (outReaderId == "" || outBookId == "") {
-                    generateUniversalNotification("danger", "<strong>出借失败</strong>", "<p>信息填写不完整，请检查后重试。</p>");
-                } else {
-                    $(function () {
-                        $.ajax({
-                            url: '../SysManagerAction?type=out&userId=' + outReaderId + 'bookIsbn=' + outBookId,
-                            type: 'GET',
-                            data: {
-                                method: 'query'
-                            },
-                            success: function () {
-                                generateUniversalNotification("success", "<strong>出借成功</strong>");
-                            },
-                            error: function (xhr) {
-                                var errorString = "<p>操作出现错误，请检查填写的信息是否正确。以下提示可能有助于修复错误：</p>" + xhr.status + " " + xhr.statusText + "</p>";
-                                generateUniversalNotification("danger", "<strong>出借失败</strong>", errorString)
-                            }
-                        })
-                    })
-                }
-            } catch (error) {
-                var errorString = "<p>操作出现错误，请检查填写的信息是否正确。以下提示可能有助于修复错误：</p>" + xhr.status + " " + xhr.statusText + "</p>";
-                generateUniversalNotification("danger", "<strong>出借失败</strong>", errorString)
-            }
-        } else if (type == "in") {
-            try {
-                inReaderId = document.getElementById("inReaderId").val();
-                inBookId = document.getElementById("inBookId").val();
-                if (inReaderId == "" || inBookId == "") {
-                    generateUniversalNotification("danger", "<strong>归还失败</strong>", "<p>信息填写不完整，请检查后重试。</p>");
-                } else {
-                    $(function () {
-                        $.ajax({
-                            url: '../SysManagerAction?type=back&userId=' + outReaderId + 'bookIsbn=' + outBookId,
-                            type: 'GET',
-                            data: {
-                                method: 'query'
-                            },
-                            success: function () {
-                                generateUniversalNotification("success", "<strong>归还成功</strong>");
-                            },
-                            error: function (xhr) {
-                                var errorString = "<p>操作出现错误，请检查填写的信息是否正确。以下提示可能有助于修复错误：</p>" + xhr.status + " " + xhr.statusText + "</p>";
-                                generateUniversalNotification("danger", "<strong>归还失败</strong>", errorString)
-                            }
-                        })
-                    })
-                }
-
-            } catch (error) {
-                var errorString = "<p>操作出现错误，请检查填写的信息是否正确。以下提示可能有助于修复错误：</p>" + xhr.status + " " + xhr.statusText + "</p>";
-                generateUniversalNotification("danger", "<strong>归还失败</strong>", errorString)
-            }
-        } else {
-            generateUniversalNotification("danger", "<strong>参数错误</strong>", "<p>图书处理操作参数传递错误，如遇此问题，请反馈给开发者。</p>");
-        }
     }
 }

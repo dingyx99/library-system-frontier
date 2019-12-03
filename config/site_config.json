@@ -1,5 +1,5 @@
 {
-    "brandname": "唱跳rap",
+    "brandname": "亚历山大",
     "registerValidation": [{
         "role": "email",
         "pattern": "/^([A-Za-z0-9_\\\\-\\\\.\\u4e00-\\u9fa5])+\\\\@([A-Za-z0-9_\\\\-\\\\.])+\\.([A-Za-z]{2,8})$/",

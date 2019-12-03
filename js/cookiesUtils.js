@@ -1,23 +1,5 @@
-//Remember to delete before release
-function setCookie(name, value, path, domain, secure) {
-    var date = new Date();
-    date.setTime(date.getTime() + 7200000);
-    document.cookie = name + "=" + encodeURI(value) +
-        ((date) ? "; expires=" + date : "") +
-        ((path) ? "; path=" + path : "") +
-        ((domain) ? "; domain=" + domain : "") +
-        ((secure) ? "; secure=" + secure : "");
-}
-
-function clearCookie(cname) {
-    var d = new Date();
-    d.setTime(d.getTime() - 24*60*60*1000);
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + "" + ";" + expires;
-}
-
 function loginStatCheck() {
-    if(getCookie("LoginEmail") && getCookie("LoginPassword") && getCookie("LoginUsername")){
+    if (getCookie("LoginEmail") && getCookie("LoginPassword") && getCookie("LoginUsername")) {
         return true;
     }
     return false;
@@ -32,33 +14,62 @@ function getCookie(cName) {
         var cookieName = $.trim(cookieNum[0]);
         var cookieValue = $.trim(cookieNum[1]);
 
-        if(cookieName == cName){
+        if (cookieName == cName) {
             return cookieValue;
         }
     }
     return false;
 }
 
-function logout(){
-	var req = getXMLHttpRequest();
-	req.open("GET", "../LogoutAction");
-	req.send(null);
-//    clearCookie("LoginEmail");
-//    clearCookie("LoginPassword");
-//    clearCookie("LoginUsername");
+function getUserInfo(name) {
+    if (loginStatCheck()) {
+        var email = getCookie("LoginEmail");
+        var userID = ""
+        var userRole = "b1f707d4-bff4-4670-a0e4-21ddc812bf69";
+        $(function () {
+            $.ajax({
+                url: '../GetMemMesAction?email=' + email,
+                type: 'GET',
+                data: {
+                    method: 'query'
+                },
+                dataType: 'json',
+                success: function (data) {
+                    var obj = eval(data);
+                    var role = "b1f707d4-bff4-4670-a0e4-21ddc812bf69"
+                    if (obj.role != 20) {
+                        role = "924a86a5-58b2-4158-b487-a567040f8df8"
+                    }
+                    userID = obj.id;
+                    userRole = role;
+                },
+                error: function (xhr) {
+                    var errorString = "<p>加载用户信息时出现错误，以下为可能有用的信息：</p><p>" + xhr.status + " " + xhr.statusText + "</p>";
+                    generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
+                }
+            })
+        })
+        if (name == "id") {
+            return userID;
+        } else if (name == "role") {
+            return userRole;
+        }
+        return null;
+    }
+    else {
+        return null;
+    }
+}
+
+function logout() {
+    var req = getXMLHttpRequest();
+    req.open("GET", "../LogoutAction");
+    req.send(null);
     generateNotification('info', '<strong>操作成功</strong>', '<p>您已成功登出，等待重新加载...</p>', reloadInterval());
 }
 
-//Remember to delete before release
-function createTestCookie() {
-    setCookie("LoginEmail", "test@contoso.com", "/", "127.0.0.1", "");
-    setCookie("LoginPassword", "Test123", "/", "127.0.0.1", "");
-    setCookie("LoginUsername", "test", "/", "127.0.0.1", "");
-    location.reload();
-}
-
 function loginModify() {
-    if(loginStatCheck()){
+    if (loginStatCheck()) {
         var username = getCookie("LoginUsername");
         document.getElementById("nav_login_link").innerHTML = "欢迎您， " + username;
         document.getElementById("nav_login_link").removeAttribute("data-target");
@@ -73,7 +84,7 @@ function generateNotification(type, title, message, closedFunc) {
     $.notify({
         title: title,
         message: message
-        },{
+    }, {
         type: type,
         onClosed: closedFunc,
         delay: 3000
@@ -86,7 +97,7 @@ function generateNotification(type, title, message, closedFunc) {
 }
 
 function reloadInterval() {
-    self.setInterval(function(){
+    self.setInterval(function () {
         location.reload();
-    },3000)
+    }, 3000)
 }

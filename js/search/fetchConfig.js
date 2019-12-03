@@ -25,8 +25,8 @@ function showDetailsPage() {
         document.getElementById("search-results-area").style.display="";
         document.getElementById("keyword-display").innerHTML=getSearchKeyword();
         $("#search_keyword").val(getSearchKeyword());
-        showTestSearchResults(); //For test
-        //showSearchResults(); //Release, currently off
+        //showTestSearchResults(); //For test
+        showSearchResults(); //Release, currently off
     }
 }
 //Remember to delete before release
@@ -54,7 +54,7 @@ function showTestSearchResults() {
                     tr.append('<td>' + val.isbn + '</td>');     //ISBN
                     tr.append('<td>' + val.clc + '/' + val.gcbh + '</td>');    //CLC Number
                     tr.append(StatusInfo[convertStatus(val.status, val.inlib)]);    //Show out staus
-                    tr.append('<td><i class="ms-Icon ms-Icon--AddFavorite" aria-hidden="true" id="favIcon' + index + '" onclick="toggleFav(' + index + ');"></i></td>')    //Fav icon
+                    tr.append('<td><i class="ms-Icon ms-Icon--AddFavorite" aria-hidden="true" id="favIcon' + index + '" onclick="toggleFav(' + index + ','+ val.isbn + ');"></i></td>')    //Fav icon
                     tbody.append(tr);
                 });
                 $('#search-results-form tbody').replaceWith(tbody);
@@ -62,6 +62,7 @@ function showTestSearchResults() {
             error: function(xhr) {
                 var errorString = "<p>加载搜索结果时出现错误，以下为可能有用的信息：</p><p>" + xhr.status + " " + xhr.statusText + "</p>";
                 generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
+                throw err = new Error(xhr.status + " " + xhr.statusText);
             }
         });
     });
@@ -93,7 +94,7 @@ function showSearchResults() {
                     tr.append('<td>' + val.isbn + '</td>');     //ISBN
                     tr.append('<td>' + val.clc + '/' + val.gcbh + '</td>');    //CLC Number
                     tr.append(StatusInfo[convertStatus(val.status, val.inlib)]);    //Show out staus
-                    tr.append('<td><i class="ms-Icon ms-Icon--AddFavorite" aria-hidden="true" id="favIcon' + index + '" onclick="toggleFav(' + index + ');"></i></td>')    //Fav icon
+                    tr.append('<td><i class="ms-Icon ms-Icon--AddFavorite" aria-hidden="true" id="favIcon' + index + '" onclick="toggleFav(' + index + ',' + val.isbn + ');"></i></td>')    //Fav icon
                     tbody.append(tr);
                 });
                 $('#search-results-form tbody').replaceWith(tbody);
@@ -101,6 +102,7 @@ function showSearchResults() {
             error: function(xhr) {
                 var errorString = "<p>加载搜索结果时出现错误，以下为可能有用的信息：</p><p>" + xhr.status + " " + xhr.statusText + "</p>";
                 generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
+                throw err = new Error(xhr.status + " " + xhr.statusText);
             }
         });
     });
