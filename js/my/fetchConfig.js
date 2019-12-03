@@ -26,9 +26,13 @@ function checkLogin(){
     else {
         loginModify();
         document.getElementById("my-info-area").style.display="";
-        showQr("B6F95F60-AA9A-4768-86EB-A6B916DAC9AD");
+        showGreetings();
+        loadData();
+        showQr(userIdBundle);
     }
 }
+
+var userIdBundle = "";
 
 function showQr(userId) {
     var qrcode = new QRCode(document.getElementById("qrcode-area"), {

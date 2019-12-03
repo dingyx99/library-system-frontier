@@ -58,6 +58,10 @@ function showTestSearchResults() {
                     tbody.append(tr);
                 });
                 $('#search-results-form tbody').replaceWith(tbody);
+            },
+            error: function(xhr) {
+                var errorString = "<p>加载搜索结果时出现错误，以下为可能有用的信息：</p><p>" + xhr.status + " " + xhr.statusText + "</p>";
+                generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
             }
         });
     });
@@ -93,6 +97,10 @@ function showSearchResults() {
                     tbody.append(tr);
                 });
                 $('#search-results-form tbody').replaceWith(tbody);
+            },
+            error: function(xhr) {
+                var errorString = "<p>加载搜索结果时出现错误，以下为可能有用的信息：</p><p>" + xhr.status + " " + xhr.statusText + "</p>";
+                generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
             }
         });
     });

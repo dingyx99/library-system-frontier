@@ -22,7 +22,12 @@ function jumpToIndex() {
 function jumpSearch() {
     var options = $("#search_type option:selected").val();
     var keyword = $("#search_keyword").val();
-    location.replace("./search.html?type=" + options + "&keyword=" + keyword);
+    if(keyword == "" || (options != "any" || options != "name" || options != "author" || options != "isbn")) {
+        generateUniversalNotification("danger", "<strong>请输入需要搜索的内容</strong>", "<p>请输入需要搜索的内容，然后再进行搜索。</p>")
+    }
+    else {
+        location.replace("./search.html?type=" + options + "&keyword=" + keyword);
+    }
 }
 
 function generateUniversalNotification(type, title, message) {
@@ -55,6 +60,10 @@ function hitokoto(contentId, fromId) {
                 var from = obj.from;
                 document.getElementById(contentId).innerHTML = content;
                 document.getElementById(fromId).innerHTML = from;
+            },
+            error: function(xhr) {
+                var errorString = "<p>加载一句推荐时出现错误，以下为可能有用的信息：</p><p>" + xhr.status + " " + xhr.statusText + "</p><p>注意，本功能需要连接互联网才能使用，请确保您已经连接至互联网。</p>";
+                generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
             }
         })
     })
