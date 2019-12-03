@@ -1,7 +1,7 @@
 let configURL = 'config/site_config.json';
 let request = new XMLHttpRequest;
 request.open('GET', configURL);
-request.responsetypee = 'text';
+request.responsetype = 'text';
 request.send();
 
 request.onload = function () {
@@ -28,44 +28,6 @@ function showDetailsPage() {
         //showTestSearchResults(); //For test
         showSearchResults(); //Release, currently off
     }
-}
-//Remember to delete before release
-function showTestSearchResults() {
-    var StatusInfo = ['<td class="text-danger">不再提供本书</td>','<td class="text-info">可供借阅</td>','<td class="text-warning">已经出借</td>','<td class="text-danger">本书不提供外借</td>'];
-    $(function(){
-        $.ajax({
-            url: '/testSearchQuery.json', //Remember to delete file before release
-            type: 'GET',
-            data: {
-                method: 'query'
-            },
-            dataType: 'json',
-            success: function(data){
-                var obj = eval(data);
-                var tbody= $('<tbody></tbody>');
-                $(obj).each(function(index){
-                    var newIndex = index + 1;
-                    var val = obj[index];
-                    var tr = $('<tr></tr>');
-                    
-                    tr.append('<td>' + newIndex + '</td>');     //Index
-                    tr.append('<td>' + val.name + '</td>');     //Name
-                    tr.append('<td>' + val.author + '</td>');   //Author
-                    tr.append('<td>' + val.isbn + '</td>');     //ISBN
-                    tr.append('<td>' + val.clc + '/' + val.gcbh + '</td>');    //CLC Number
-                    tr.append(StatusInfo[convertStatus(val.status, val.inlib)]);    //Show out staus
-                    tr.append('<td><i class="ms-Icon ms-Icon--AddFavorite" aria-hidden="true" id="favIcon' + index + '" onclick="toggleFav(' + index + ','+ val.isbn + ');"></i></td>')    //Fav icon
-                    tbody.append(tr);
-                });
-                $('#search-results-form tbody').replaceWith(tbody);
-            },
-            error: function(xhr) {
-                var errorString = "<p>加载搜索结果时出现错误，以下为可能有用的信息：</p><p>" + xhr.status + " " + xhr.statusText + "</p>";
-                generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
-                throw err = new Error(xhr.status + " " + xhr.statusText);
-            }
-        });
-    });
 }
 
 function showSearchResults() {

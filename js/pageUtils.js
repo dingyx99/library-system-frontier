@@ -92,10 +92,10 @@ function showGreetings() {
     }
 }
 
-function FavoriteActions(type, userId, bookIsbn) {
+function FavoriteActions(type, email, bookIsbn) {
     $(function () {
         $.ajax({
-            url: '../FavoriteAction?type=' + type + '&userId=' + userId + '&bookIsbn=' + bookIsbn,
+            url: '../FavoriteAction?type=' + type + '&userId=' + email + '&bookIsbn=' + bookIsbn,
             type: 'GET',
             data: {
                 method: 'query'

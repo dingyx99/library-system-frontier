@@ -46,7 +46,7 @@ function loadGreetingData() {
                 document.getElementById("info-rent-book-num").innerHTML = obj.borrowsNum;
                 document.getElementById("info-reach-time-num").innerHTML = obj.dLNum;
                 document.getElementById("fav-book-num").innerHTML = obj.favNum;
-                document.getElementById("overdue-numer").innerHTML = obj.oNum;
+                document.getElementById("overdue-number").innerHTML = obj.oNum;
                 console.log("Successfully parsed user info.")
             },
             error: function (xhr) {
@@ -81,32 +81,32 @@ function loadUserDetails() {
                 } else if (role == "924a86a5-58b2-4158-b487-a567040f8df8") {
                     $("#myRole").val("管理员");
                     document.getElementById("adminManage").style.display = ""
+                    writeAdmin(true);
                 }
                 console.log("Successfully parsed user details.");
                 var str = "{username:'" + obj.username + "',userid:'" + obj.id + ",userrole:'" + role + "'}"
                 var base = new Base64();
                 userIdBundle = base.encode(str);
+                showQr(userIdBundle);
                 console.log("Successfully generated user Qr info.")
             },
             error: function (xhr) {
-                throw err = new Error("Error with LOAD BORROW: " + xhr.status + " " + xhr.statusText);
+                throw err = new Error("Error with USER INFO: " + xhr.status + " " + xhr.statusText);
             }
         })
     })
 }
 
-function isAdmin() {
-    if (getUserInfo("role") == "924a86a5-58b2-4158-b487-a567040f8df8") {
-        return true;
-    } else {
-        return false;
-    }
+var ifAdmin
+function writeAdmin(value) {
+    ifAdmin = value;
 }
 
 function loadBorrowData() {
+    var email = getCookie("LoginEmail");
     $(function () {
         $.ajax({
-            url: '../GetBorrowMesAction?userId=' + getUserInfo("id"),
+            url: '../GetBorrowMesAction?userId=' + email,
             type: 'GET',
             data: {
                 method: 'query'
@@ -143,9 +143,10 @@ function loadBorrowData() {
 }
 
 function loadFavData() {
+    var email = getCookie("LoginEmail");
     $(function () {
         $.ajax({
-            url: '../GetFavoriteMesAction?userId=' + getUserInfo("id"),
+            url: '../GetFavoriteMesAction?userId=' + email,
             type: 'GET',
             data: {
                 method: 'query'
@@ -177,9 +178,9 @@ function loadFavData() {
 }
 
 function unFav(bookIsbn) {
-    userId = getUserInfo("id");
+    var email = getCookie("LoginEmail");
     try {
-        FavoriteActions("delete", userId, bookIsbn);
+        FavoriteActions("delete", email, bookIsbn);
         generateNotification('info', '<strong>操作成功</strong>', '<p>成功取消收藏！</p>', reloadInterval());
     } catch (error) {
         var errorString = "<p>操作失败，以下提示可能有助于修复错误：</p>" + error + "</p>";
@@ -188,7 +189,7 @@ function unFav(bookIsbn) {
 }
 
 function bookProcess(type) {
-    if (!isAdmin()) {
+    if (!ifAdmin) {
         generateUniversalNotification("danger", "<strong>权限不足</strong>", "<p>您的用户权限不足以执行本操作。</p>");
     } else {
         if (type == "out") {

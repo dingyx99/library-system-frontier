@@ -15,11 +15,11 @@ function getSearchKeyword() {
 function toggleFav(id, bookId) {
     let realId = "favIcon" + id
     let jQueryId = "#" + realId
-    let userId = getUserInfo("id")
+    var email = getCookie("LoginEmail");
     if (loginStatCheck()) {
         if ($(jQueryId).attr("class") == "ms-Icon ms-Icon--AddFavorite") {
             try {
-                FavoriteActions("add", userId, bookId);
+                FavoriteActions("add", email, bookId);
                 document.getElementById(realId).className = "ms-Icon ms-Icon--FavoriteStarFill";
                 generateNotification('info', '<strong>操作成功</strong>', '<p>成功加入收藏！</p>');
             } catch (error) {
@@ -28,7 +28,7 @@ function toggleFav(id, bookId) {
             }
         } else {
             try {
-                FavoriteActions("delete", userId, bookId);
+                FavoriteActions("delete", email, bookId);
                 document.getElementById(realId).className = "ms-Icon ms-Icon--AddFavorite";
                 generateNotification('info', '<strong>操作成功</strong>', '<p>成功取消收藏！</p>');
             } catch (error) {

@@ -2,7 +2,7 @@ let configURL = 'config/site_config.json';
 let request = new XMLHttpRequest;
 var globalBrandName = ""
 request.open('GET', configURL);
-request.responsetypee = 'text';
+request.responsetype = 'text';
 request.send();
 
 request.onload = function () {

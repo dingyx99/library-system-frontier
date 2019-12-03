@@ -1,7 +1,7 @@
 let configURL = 'config/site_config.json';
 let request = new XMLHttpRequest;
 request.open('GET', configURL);
-request.responsetypee = 'text';
+request.responsetype = 'text';
 request.send();
 
 request.onload = function () {
@@ -28,7 +28,6 @@ function checkLogin(){
         document.getElementById("my-info-area").style.display="";
         showGreetings();
         loadData();
-        showQr(userIdBundle);
     }
 }
 

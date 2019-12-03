@@ -22,42 +22,54 @@ function getCookie(cName) {
 }
 
 function getUserInfo(name) {
-    if (loginStatCheck()) {
-        var email = getCookie("LoginEmail");
-        var userID = ""
-        var userRole = "b1f707d4-bff4-4670-a0e4-21ddc812bf69";
-        $(function () {
-            $.ajax({
-                url: '../GetMemMesAction?email=' + email,
-                type: 'GET',
-                data: {
-                    method: 'query'
-                },
-                dataType: 'json',
-                success: function (data) {
-                    var obj = eval(data);
-                    var role = "b1f707d4-bff4-4670-a0e4-21ddc812bf69"
-                    if (obj.role != 20) {
-                        role = "924a86a5-58b2-4158-b487-a567040f8df8"
-                    }
-                    userID = obj.id;
-                    userRole = role;
-                },
-                error: function (xhr) {
-                    var errorString = "<p>加载用户信息时出现错误，以下为可能有用的信息：</p><p>" + xhr.status + " " + xhr.statusText + "</p>";
-                    generateUniversalNotification("danger", "<strong>出现错误</strong>", errorString);
+    var email = getCookie("LoginEmail");
+    $(function () {
+        $.ajax({
+            url: '../GetMemMesAction?email=' + email,
+            type: 'GET',
+            data: {
+                method: 'query'
+            },
+            dataType: 'json',
+            success: function (data) {
+                var obj = eval(data);
+                var role = "b1f707d4-bff4-4670-a0e4-21ddc812bf69"
+                if (obj.role != 20) {
+                    role = "924a86a5-58b2-4158-b487-a567040f8df8"
                 }
-            })
+                RWUserid("Write", obj.id);
+                RWUserRole("Write", role);
+            },
+            error: function (xhr) {
+                throw err = new Error("Error with USER INFO: " + xhr.status + " " + xhr.statusText);
+            }
         })
-        if (name == "id") {
-            return userID;
-        } else if (name == "role") {
-            return userRole;
-        }
-        return null;
+    })
+    if (name == "id") {
+        RWUserid("Read", "");
+    } else if (name == "role") {
+        RWUserRole("Read", "")
     }
-    else {
-        return null;
+    return null;
+}
+
+function RWUserid(type, value) {
+    var Userid;
+    if(type == "Write") {
+        Userid = value;
+    }
+    else if(type == "Read") {
+        return Userid;
+    }
+}
+
+function RWUserRole(type, value) {
+    var userRole;
+    if(type == "Write") {
+        userRole = value;
+    }
+    else if(type == "Read") {
+        return userRole;
     }
 }
 
